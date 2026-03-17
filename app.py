@@ -48,9 +48,10 @@ init_dev_fallback()
 def index():
     try:
         return app.send_static_file('index.html')
-    except:
-        return render_template('Auth/login.html')
-
+    except Exception as e:
+        print("INDEX ERROR:", e)
+        return "App is running ✅"
+    
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
