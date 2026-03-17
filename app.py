@@ -18,7 +18,8 @@ def get_db_connection():
         password=os.getenv("MYSQLPASSWORD"),
         database=os.getenv("MYSQLDATABASE"),
         port=int(os.getenv("MYSQLPORT", 3306)),
-        cursorclass=pymysql.cursors.DictCursor
+        cursorclass=pymysql.cursors.DictCursor,
+        connect_timeout=10
     )
 
 # SQLite fallback
@@ -133,7 +134,7 @@ def init_dev_fallback():
         print("MYSQL CONNECTED ✅")
         conn.close()
     except Exception as e:
-        print("MYSQL ERROR:", e)
+        print("MYSQL ERROR:", e)   # 👈 THIS IS KEY
         use_sqlite = True
 # ---------------- RUN ---------------- #
 
