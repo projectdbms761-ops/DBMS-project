@@ -4,10 +4,15 @@ import os
 import sqlite3
 from pathlib import Path
 from urllib.parse import urlparse
+import logging
 
 # Flask app
 app = Flask(__name__, template_folder='html', static_folder='.', static_url_path='')
 app.secret_key = os.environ.get('FLASK_SECRET', 'your_secret_key')
+
+# Basic logging to stdout for PaaS visibility
+logging.basicConfig(level=logging.INFO)
+app.logger.setLevel(logging.INFO)
 
 # ---------------- MYSQL CONNECTION ---------------- #
 
@@ -93,6 +98,28 @@ def warden_dashboard():
 def logout():
     session.clear()
     return redirect(url_for('login'))
+
+
+# Health endpoint for platform probes
+@app.route('/health')
+def health():
+    try:
+        if use_sqlite:
+            return jsonify({"ok": True, "db": "sqlite"})
+
+        conn = get_db_connection()
+        conn.close()
+        return jsonify({"ok": True, "db": "mysql"})
+    except Exception as e:
+        app.logger.exception("Health check failed")
+        return jsonify({"ok": False, "error": str(e)}), 500
+
+
+# Global exception logger to capture uncaught errors
+@app.errorhandler(Exception)
+def handle_exception(e):
+    app.logger.exception("Unhandled exception")
+    return jsonify({"error": "internal server error"}), 500
 
 # ---------------- DB TEST ---------------- #
 
