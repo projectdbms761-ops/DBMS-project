@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | HostelFlow</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body class="login-page">
+    <div class="background-glow"></div>
+    
+    <div class="login-card">
+        <div class="logo">Hostel<span>Flow</span></div>
+        <h2>Welcome Back</h2>
+        <p>Please enter your credentials to access the portal.</p>
+
+       <div class="role-selector">
+    <button type="button" class="role-btn active" onclick="setRole('student', event)">Student</button>
+    <button type="button" class="role-btn" onclick="setRole('admin', event)">Warden/Admin</button>
+</div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label>Identifier (ID)</label>
+                <input type="text" id="userId" placeholder="e.g. STU101" required>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="password" placeholder="••••••••" required>
+            </div>
+            <button type="submit" class="primary-btn login-submit">Sign In</button>
+        </form>
+        
+        <div class="footer-links">
+            <a href="#">Forgot Password?</a>
+            <span>•</span>
+            <a href="#">Request Access</a>
+        </div>
+    </div>
+
+    <script>
+        function setRole(role, event) {
+    // 1. Prevent button from submitting the form unintentionally
+    if (event) event.preventDefault();
+
+    // 2. Toggle active UI for buttons
+    document.querySelectorAll('.role-btn').forEach(btn => btn.classList.remove('active'));
+    
+    // 3. Add active class to the clicked button
+    if (event && event.currentTarget) {
+        event.currentTarget.classList.add('active');
+    } else {
+        // Fallback: If event is tricky, find by text
+        const buttons = document.querySelectorAll('.role-btn');
+        buttons.forEach(btn => {
+            if(role === 'admin' && btn.innerText.includes('Warden')) btn.classList.add('active');
+            if(role === 'student' && btn.innerText === 'Student') btn.classList.add('active');
+        });
+    }
+
+    // 4. Update placeholder based on role
+    const idInput = document.getElementById('userId');
+    idInput.placeholder = role === 'student' ? 'e.g. STU101' : 'e.g. WRD501';
+    
+    // 5. Store role for login
+    localStorage.setItem('userRole', role);
+}
+
+// Inside your login script
+document.getElementById('loginForm').onsubmit = async (e) => {
+    e.preventDefault();
+    // Ensure a role is always provided (default to student)
+    const role = localStorage.getItem('userRole') || 'student';
+
+    const response = await fetch('/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            id: document.getElementById('userId').value,
+            password: document.getElementById('password').value,
+            role: role
+        })
+    });
+
+    const result = await response.json();
+    if (result.success) {
+        // Store the logged-in identifier so dashboard.js recognizes the session
+        localStorage.setItem('currentUserId', document.getElementById('userId').value);
+        localStorage.setItem('userRole', result.role || role);
+        window.location.href = result.role === 'student' ? '/student/dashboard' : '/warden/dashboard';
+    } else {
+        alert("Login Failed: " + result.message);
+    }
+};
+
+    </script>
+</body>
+</html>

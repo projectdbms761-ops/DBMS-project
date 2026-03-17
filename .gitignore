@@ -1,0 +1,32 @@
+# 🔹 Python
+__pycache__/
+*.pyc
+*.pyo
+
+# 🔹 Virtual Environment
+myenv/
+venv/
+
+# 🔹 Database
+*.db
+*.sqlite3
+
+# 🔹 Environment variables (important)
+.env
+
+# 🔹 Logs
+*.log
+
+# 🔹 VS Code settings
+.vscode/
+
+# 🔹 OS files
+.DS_Store
+Thumbs.db
+
+# 🔹 Node (if you add later)
+node_modules/
+
+# 🔹 Build folders
+dist/
+build/

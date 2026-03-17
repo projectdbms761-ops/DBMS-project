@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payments | HostelFlow</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-glow"></div>
+    
+    <div class="dashboard-wrapper">
+        <aside class="sidebar">
+            <div class="logo" onclick="location.href='student-dashboard.html'">Hostel<span>Flow</span></div>
+            <nav class="side-nav">
+                <a href="student-dashboard.html">Overview</a>
+                <a href="leave.html">Leave Requests</a>
+                <a href="laundry.html">Laundry</a>
+                <a href="complaints.html">Complaints</a>
+                <a href="fees.html" class="active">Payments</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="content-header">
+                <h1>Financial Ledger</h1>
+                <div class="fee-summary">
+                    <div class="summary-item">
+                        <span>Total Paid</span>
+                        <strong style="color: #4ade80;">₹85,000</strong>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="summary-item">
+                        <span>Pending Amount</span>
+                        <strong style="color: #f87171;">₹12,500</strong>
+                    </div>
+                </div>
+            </header>
+
+            <section class="glass-card" style="margin-bottom: 2rem;">
+                <h3>Quick Payment</h3>
+                <p style="color: var(--text-dim); margin-bottom: 1.5rem;">Pay your remaining mess or hostel dues securely.</p>
+                <div style="display: flex; gap: 1rem;">
+                    <input type="number" placeholder="Enter Amount" class="search-bar" style="max-width: 200px;">
+                    <button class="primary-btn">Proceed to Pay</button>
+                </div>
+            </section>
+
+            <section class="table-card">
+                <h3>Transaction History</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Transaction_ID</th>
+                            <th>Date</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="feeTableBody">
+                        </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+
+    <script src="../js/data-fetch.js"></script>
+    <script src="../js/fees.js"></script>
+</body>
+</html>

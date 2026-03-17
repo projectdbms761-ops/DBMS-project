@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaints | HostelFlow</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-glow"></div>
+    
+    <div class="dashboard-wrapper">
+        <aside class="sidebar">
+            <div class="logo" onclick="location.href='student-dashboard.html'">Hostel<span>Flow</span></div>
+            <nav class="side-nav">
+                <a href="student-dashboard.html">Overview</a>
+                <a href="leave.html">Leave Requests</a>
+                <a href="laundry.html">Laundry</a>
+                <a href="complaints.html" class="active">Complaints</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="content-header">
+                <h1>Support Desk</h1>
+                <div class="badge-count">Active Tickets: <span id="ticketCount">1</span></div>
+            </header>
+
+            <section class="glass-card" style="margin-bottom: 2rem;">
+                <h3>File a New Complaint</h3>
+                <form id="complaintForm" class="grid-form">
+                    <div class="form-group">
+                        <label>Complaint Type</label>
+                        <select id="complaintType" required>
+                            <option value="">Select Category</option>
+                            <option value="Plumbing">Plumbing</option>
+                            <option value="Electrical">Electrical</option>
+                            <option value="Carpentry">Carpentry</option>
+                            <option value="Internet">Internet/Wifi</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Room Number</label>
+                        <input type="text" id="roomNum" value="201" readonly>
+                    </div>
+                    <div class="form-group" style="grid-column: span 2;">
+                        <label>Description</label>
+                        <textarea id="description" placeholder="Describe the issue in detail..." rows="3" required></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="primary-btn">Submit Ticket</button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="table-card">
+                <h3>My Tickets</h3>
+                <div id="complaintList">
+                    </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="../js/data-fetch.js"></script>
+    <script src="../js/complaints.js"></script>
+</body>
+</html>

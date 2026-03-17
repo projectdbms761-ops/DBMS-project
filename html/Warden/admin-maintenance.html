@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maintenance Logs | Warden Portal</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-glow"></div>
+    
+    <div class="dashboard-wrapper">
+        <aside class="sidebar">
+            <div class="logo" onclick="location.href='admin-dashboard.html'">Hostel<span>Flow</span></div>
+            <nav class="side-nav">
+                <a href="admin-dashboard.html">Hostel Overview</a>
+                <a href="admin-students.html">Manage Students</a>
+                <a href="admin-rooms.html">Room Allotments</a>
+                <a href="admin-maintenance.html" class="active">Maintenance Logs</a>
+                <a href="admin-finance.html">Fee Defaulters</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="content-header">
+                <h1>Maintenance & Repairs</h1>
+                <div class="fee-summary">
+                    <div class="summary-item">
+                        <span>Total Maint. Cost</span>
+                        <strong style="color: #f87171;">₹42,300</strong>
+                    </div>
+                </div>
+            </header>
+
+            <section class="table-card">
+                <h3>Work Orders</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Maint_ID</th>
+                            <th>Comp_ID</th>
+                            <th>Work Type</th>
+                            <th>Cost</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="maintenanceTableBody">
+                        </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+
+    <script src="../js/admin-maintenance.js"></script>
+</body>
+</html>

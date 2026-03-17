@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warden Portal | HostelFlow</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-glow"></div>
+    
+    <div class="dashboard-wrapper">
+        <aside class="sidebar">
+            <div class="logo">Hostel<span>Flow</span> Admin</div>
+            <nav class="side-nav">
+                <a href="#" class="active">Hostel Overview</a>
+                <a href="admin-students.html">Manage Students</a>
+                <a href="admin-rooms.html">Room Allotments</a>
+                <a href="admin-maintenance.html">Maintenance Logs</a>
+                <a href="admin-finance.html">Fee Defaulters</a>
+            </nav>
+            <div class="user-profile-mini">
+                <div class="avatar">WD</div>
+                <div>
+                    <p class="u-name">Admin Warden</p>
+                    <p class="u-id">WRD_501</p>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="content-header">
+                <h1>Warden Dashboard: <span style="color: var(--accent-blue)">Boys Alpha</span></h1>
+                <div class="admin-actions">
+                    <button class="primary-btn" onclick="location.href='/logout'">Logout</button>
+                </div>
+            </header>
+
+            <div class="dashboard-grid">
+                <div class="card glass-card">
+                    <h3>Total Residents</h3>
+                    <div class="highlight-val">184</div>
+                    <p>Current Capacity: 200</p>
+                    <div class="progress-bar"><div style="width: 92%"></div></div>
+                </div>
+
+                <div class="card glass-card">
+                    <h3>Active Complaints</h3>
+                    <div class="highlight-val" style="color: #f87171;">12</div>
+                    <p>4 Requires Immediate Action</p>
+                    <button class="secondary-btn" style="margin-top: 10px;">View Tickets</button>
+                </div>
+
+                <div class="card glass-card">
+                    <h3>Pending Fees</h3>
+                    <div class="highlight-val" style="color: #fbbf24;">₹2.4L</div>
+                    <p>Total Outstanding Dues</p>
+                    <button class="secondary-btn" style="margin-top: 10px;">Generate Report</button>
+                </div>
+
+                <div class="card glass-card wide">
+                    <h3>Recent Leave Requests</h3>
+                    <table style="width: 100%; margin-top: 1rem;">
+                        <thead>
+                            <tr>
+                                <th>Student</th>
+                                <th>Leave Date</th>
+                                <th>Reason</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminLeaveTable">
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/admin.js"></script>
+</body>
+</html>

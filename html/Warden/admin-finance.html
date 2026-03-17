@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance Management | Warden Portal</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-glow"></div>
+    
+    <div class="dashboard-wrapper">
+        <aside class="sidebar">
+            <div class="logo" onclick="location.href='admin-dashboard.html'">Hostel<span>Flow</span></div>
+            <nav class="side-nav">
+                <a href="admin-dashboard.html">Hostel Overview</a>
+                <a href="admin-students.html">Manage Students</a>
+                <a href="admin-rooms.html">Room Allotments</a>
+                <a href="admin-maintenance.html">Maintenance Logs</a>
+                <a href="admin-finance.html" class="active">Fee Defaulters</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="content-header">
+                <h1>Financial Oversight</h1>
+                <div class="fee-summary">
+                    <div class="summary-item">
+                        <span>Total Revenue</span>
+                        <strong style="color: #4ade80;">₹12.5L</strong>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="summary-item">
+                        <span>Total Outstanding</span>
+                        <strong style="color: #f87171;">₹2.4L</strong>
+                    </div>
+                </div>
+            </header>
+
+            <section class="table-card">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
+                    <h3>Fee Records & Defaulters</h3>
+                    <button class="secondary-btn" onclick="filterDefaulters()">Show Only Defaulters</button>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Student_ID</th>
+                            <th>Name</th>
+                            <th>Last Payment</th>
+                            <th>Total Paid</th>
+                            <th>Pending Amount</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminFeeTableBody">
+                        </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+
+    <script src="../js/admin-finance.js"></script>
+</body>
+</html>

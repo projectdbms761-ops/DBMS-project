@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laundry Service | HostelFlow</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-glow"></div>
+    
+    <div class="dashboard-wrapper">
+        <aside class="sidebar">
+            <div class="logo" onclick="location.href='student-dashboard.html'">Hostel<span>Flow</span></div>
+            <nav class="side-nav">
+                <a href="student-dashboard.html">Overview</a>
+                <a href="leave.html">Leave Requests</a>
+                <a href="laundry.html" class="active">Laundry</a>
+                <a href="complaints.html">Complaints</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="content-header">
+                <h1>Laundry Service</h1>
+                <div class="balance-card">
+                    <span>Est. Charges:</span>
+                    <strong id="totalCharges">₹0.00</strong>
+                </div>
+            </header>
+
+            <section class="glass-card" style="margin-bottom: 2rem;">
+                <h3>New Laundry Drop-off</h3>
+                <form id="laundryForm" class="grid-form">
+                    <div class="form-group">
+                        <label>Clothes Count</label>
+                        <input type="number" id="clothesCount" placeholder="0" min="1" required oninput="calculateCharges()">
+                    </div>
+                    <div class="form-group">
+                        <label>Drop-off Date</label>
+                        <input type="date" id="dropDate" required>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="primary-btn">Submit to Laundry</button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="table-card">
+                <h3>Laundry History</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Laundry_ID</th>
+                            <th>Count</th>
+                            <th>Charges</th>
+                            <th>Status</th>
+                            <th>Expected Return</th>
+                        </tr>
+                    </thead>
+                    <tbody id="laundryTableBody">
+                        </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+
+    <script src="../js/data-fetch.js"></script>
+    <script src="../js/laundry.js"></script>
+</body>
+</html>

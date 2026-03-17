@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Students | HostelFlow</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .table-container {
+            max-width: 1100px;
+            margin: 4rem auto;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+        }
+        table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+        th { text-align: left; color: var(--accent-blue); padding: 1rem; border-bottom: 1px solid var(--glass-border); }
+        td { padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.9rem; }
+        .status-pill { padding: 4px 12px; border-radius: 12px; font-size: 0.75rem; background: rgba(59, 130, 246, 0.2); }
+    </style>
+</head>
+<body>
+    <div class="background-glow"></div>
+    <section class="table-container">
+        <h2>Resident Database</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Course</th>
+                    <th>Contact</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>#STU001</td>
+                    <td>Arjun Mehta</td>
+                    <td>B.Tech CSE</td>
+                    <td>+91 98765 43210</td>
+                    <td><span class="status-pill">Active</span></td>
+                </tr>
+                <tr>
+                    <td>#STU002</td>
+                    <td>Sarah Khan</td>
+                    <td>M.Sc Physics</td>
+                    <td>+91 87654 32109</td>
+                    <td><span class="status-pill">Active</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+</body>
+</html>

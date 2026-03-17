@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | HostelFlow</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-glow"></div>
+    
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Hostel<span>Flow</span></div>
+            <ul class="nav-links">
+                <li><a href="dashboard.html" class="active">Overview</a></li>
+                <li><a href="leave.html">Leave</a></li>
+                <li><a href="laundry.html">Laundry</a></li>
+                <li><a href="complaints.html">Support</a></li>
+            </ul>
+            <div class="user-meta">
+                <span id="nav-user-id" class="u-id">STU101</span>
+                <a href="/login" class="login-btn" onclick="localStorage.removeItem('currentUserId'); localStorage.removeItem('userRole');">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="dashboard-container">
+        <header class="welcome-header">
+            <h1>Welcome back, <span id="student-name-display">Arjun</span>!</h1>
+            <p>Here is what's happening with your residency today.</p>
+        </header>
+
+        <div class="stats-grid">
+            <div class="stat-card glass-card">
+                <span class="stat-label">Room Number</span>
+                <h2 id="roomNo">B-203</h2>
+                <p id="hostelName">Boys Hostel Alpha</p>
+            </div>
+            <div class="stat-card glass-card">
+                <span class="stat-label">Pending Dues</span>
+                <h2 id="pendingDues" class="text-danger">₹5,000</h2>
+                <p>Due by March 10</p>
+            </div>
+            <div class="stat-card glass-card">
+                <span class="stat-label">Active Leaves</span>
+                <h2 id="activeLeaves">1</h2>
+                <p>Next: March 05</p>
+            </div>
+            <div class="stat-card glass-card">
+                <span class="stat-label">Laundry Status</span>
+                <h2 id="laundryStatus" class="text-warning">In Progress</h2>
+                <p>3 Items dropped</p>
+            </div>
+        </div>
+
+        <div class="details-grid">
+            <section class="glass-card">
+                <h3>Profile Details</h3>
+                <div class="info-row"><span>Student ID</span><strong>STU101</strong></div>
+                <div class="info-row"><span>Course</span><strong>B.Tech CSE</strong></div>
+                <div class="info-row"><span>Phone</span><strong>+91 9876543210</strong></div>
+                <div class="info-row"><span>Email</span><strong>arjun.m@university.edu</strong></div>
+            </section>
+
+            <section class="glass-card">
+                <h3>Room Details</h3>
+                <div class="info-row"><span>Type</span><strong>3-Seater (AC)</strong></div>
+                <div class="info-row"><span>Allotted On</span><strong>2025-08-15</strong></div>
+                <div class="roommates-list">
+                    <span>Roommates:</span>
+                    <div class="roommate-chips">
+                        <span class="chip">Rahul S.</span>
+                        <span class="chip">Sneha Rao</span>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="actions-grid">
+            <a href="fees.html" class="action-card glass-card">
+                <div class="icon">💳</div>
+                <h4>Pay Fees</h4>
+            </a>
+            <a href="leave.html" class="action-card glass-card">
+                <div class="icon">🏠</div>
+                <h4>Apply Leave</h4>
+            </a>
+            <a href="laundry.html" class="action-card glass-card">
+                <div class="icon">🧺</div>
+                <h4>Laundry</h4>
+            </a>
+            <a href="complaints.html" class="action-card glass-card">
+                <div class="icon">🛠️</div>
+                <h4>Support</h4>
+            </a>
+        </div>
+    </main>
+
+    <script src="../js/data-fetch.js"></script>
+    <script src="../js/dashboard.js"></script>
+</body>
+</html>

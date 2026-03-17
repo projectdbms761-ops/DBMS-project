@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room Allotments | Warden Portal</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-glow"></div>
+    
+    <div class="dashboard-wrapper">
+        <aside class="sidebar">
+            <div class="logo" onclick="location.href='admin-dashboard.html'">Hostel<span>Flow</span></div>
+            <nav class="side-nav">
+                <a href="admin-dashboard.html">Hostel Overview</a>
+                <a href="admin-students.html">Manage Students</a>
+                <a href="admin-rooms.html" class="active">Room Allotments</a>
+                <a href="admin-maintenance.html">Maintenance Logs</a>
+                <a href="admin-finance.html">Fee Defaulters</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="content-header">
+                <h1>Room Inventory Management</h1>
+                <div class="filter-group">
+                    <select class="search-bar" style="width: 150px;">
+                        <option>All Floors</option>
+                        <option>1st Floor</option>
+                        <option>2nd Floor</option>
+                    </select>
+                </div>
+            </header>
+
+            <div class="room-grid" id="roomContainer">
+                </div>
+        </main>
+    </div>
+
+    <script src="../js/admin-rooms.js"></script>
+</body>
+</html>
