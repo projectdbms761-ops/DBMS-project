@@ -15,10 +15,16 @@ app = Flask(__name__, template_folder='html', static_folder='.', static_url_path
 app.secret_key = os.environ.get('FLASK_SECRET', 'your_secret_key')
 
 # --- MySQL Configuration (update with real credentials or env vars) ---
-app.config['MYSQL_HOST'] = os.environ.get('MYSQL_HOST', 'localhost')
-app.config['MYSQL_USER'] = os.environ.get('MYSQL_USER', 'root')
-app.config['MYSQL_PASSWORD'] = os.environ.get('MYSQL_PASSWORD', 'your_password')
-app.config['MYSQL_DB'] = os.environ.get('MYSQL_DB', 'hostel_db')
+#app.config['MYSQL_HOST'] = os.environ.get('MYSQL_HOST')#'localhost'
+#app.config['MYSQL_USER'] = os.environ.get('MYSQL_USER' )#'root'
+#app.config['MYSQL_PASSWORD'] = os.environ.get('MYSQL_PASSWORD')#, 'your_password'
+#app.config['MYSQL_DB'] = os.environ.get('MYSQL_DB')#, 'hostel_db'
+
+app.config['MYSQL_HOST'] = os.getenv('MYSQLHOST')
+app.config['MYSQL_USER'] = os.getenv('MYSQLUSER')
+app.config['MYSQL_PASSWORD'] = os.getenv('MYSQLPASSWORD')
+app.config['MYSQL_DB'] = os.getenv('MYSQLDATABASE')
+app.config['MYSQL_PORT'] = int(os.getenv('MYSQLPORT', 3306))
 
 mysql = MySQL(app)
 
@@ -644,4 +650,4 @@ def api_delete_allocation(alloc_id):
         return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
