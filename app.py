@@ -26,21 +26,10 @@ def get_db_connection():
 
 # ---------------- SQLITE FALLBACK ---------------- #
 
-use_sqlite = False
 sqlite_db_path = Path('dev_fallback.db')
-
-def init_dev_fallback():
-    global use_sqlite
-    try:
-        conn = get_db_connection()
-        print("MYSQL CONNECTED ✅")
-        conn.close()
-    except Exception as e:
-        print("MYSQL ERROR:", e)
-        use_sqlite = True
-
-# 👉 CALL AFTER DEFINITION
-init_dev_fallback()
+# Default to sqlite when no MYSQL_URL is provided; runtime failures
+# when MYSQL_URL is set will be caught where connections are attempted.
+use_sqlite = not bool(os.getenv("MYSQL_URL"))
 
 # ---------------- ROUTES ---------------- #
 
@@ -110,11 +99,18 @@ def logout():
 @app.route('/dbtest')
 def db_test():
     try:
+        if use_sqlite:
+            conn = sqlite3.connect(sqlite_db_path)
+            cur = conn.cursor()
+            cur.execute("SELECT 1")
+            conn.close()
+            return jsonify({"ok": True, "db": "sqlite"})
+
         conn = get_db_connection()
         cur = conn.cursor()
         cur.execute("SELECT 1")
         conn.close()
-        return jsonify({"ok": True})
+        return jsonify({"ok": True, "db": "mysql"})
     except Exception as e:
         return jsonify({"error": str(e)})
 
@@ -123,6 +119,15 @@ def db_test():
 @app.route('/api/students', methods=['GET'])
 def get_students():
     try:
+        if use_sqlite:
+            conn = sqlite3.connect(sqlite_db_path)
+            cur = conn.cursor()
+            cur.execute("SELECT Student_ID, Name, Email FROM Student")
+            rows = cur.fetchall()
+            conn.close()
+            data = [{"Student_ID": r[0], "Name": r[1], "Email": r[2]} for r in rows]
+            return jsonify(data)
+
         conn = get_db_connection()
         cur = conn.cursor()
         cur.execute("SELECT Student_ID, Name, Email FROM Student")
