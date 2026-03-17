@@ -51,7 +51,7 @@ def index():
     except Exception as e:
         print("INDEX ERROR:", e)
         return "App is running ✅"
-    
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
