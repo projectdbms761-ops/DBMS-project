@@ -126,6 +126,15 @@ def get_students():
     except Exception as e:
         return jsonify({"error": str(e)})
 
+def init_dev_fallback():
+    global use_sqlite
+    try:
+        conn = get_db_connection()
+        print("MYSQL CONNECTED ✅")
+        conn.close()
+    except Exception as e:
+        print("MYSQL ERROR:", e)
+        use_sqlite = True
 # ---------------- RUN ---------------- #
 
 if __name__ == '__main__':
