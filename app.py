@@ -1,18 +1,15 @@
 import pymysql
-from flask import Flask, render_template, request, redirect, url_for, session, jsonify, abort
+from flask import Flask, render_template, request, redirect, url_for, session, jsonify
 import os
 import sqlite3
 from pathlib import Path
-from functools import wraps
-import random
+from urllib.parse import urlparse
 
 # Flask app
 app = Flask(__name__, template_folder='html', static_folder='.', static_url_path='')
 app.secret_key = os.environ.get('FLASK_SECRET', 'your_secret_key')
 
-# MySQL connection (Railway)
-from urllib.parse import urlparse
-
+# ---------------- MYSQL CONNECTION ---------------- #
 
 def get_db_connection():
     url = urlparse(os.getenv("MYSQL_URL"))
@@ -27,7 +24,8 @@ def get_db_connection():
         connect_timeout=10
     )
 
-# SQLite fallback
+# ---------------- SQLITE FALLBACK ---------------- #
+
 use_sqlite = False
 sqlite_db_path = Path('dev_fallback.db')
 
@@ -35,12 +33,13 @@ def init_dev_fallback():
     global use_sqlite
     try:
         conn = get_db_connection()
+        print("MYSQL CONNECTED ✅")
         conn.close()
-        print("MySQL Connected ✅")
-    except Exception:
-        print("Using SQLite fallback ⚠️")
+    except Exception as e:
+        print("MYSQL ERROR:", e)
         use_sqlite = True
 
+# 👉 CALL AFTER DEFINITION
 init_dev_fallback()
 
 # ---------------- ROUTES ---------------- #
@@ -132,15 +131,6 @@ def get_students():
     except Exception as e:
         return jsonify({"error": str(e)})
 
-def init_dev_fallback():
-    global use_sqlite
-    try:
-        conn = get_db_connection()
-        print("MYSQL CONNECTED ✅")
-        conn.close()
-    except Exception as e:
-        print("MYSQL ERROR:", e)   # 👈 THIS IS KEY
-        use_sqlite = True
 # ---------------- RUN ---------------- #
 
 if __name__ == '__main__':
