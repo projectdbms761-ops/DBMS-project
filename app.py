@@ -1,7 +1,7 @@
 import pymysql
 pymysql.install_as_MySQLdb()
 from flask import Flask, render_template, request, redirect, url_for, session, jsonify, abort
-from flask_mysqldb import MySQL
+#from flask_mysqldb import MySQL
 import os
 import sqlite3
 from pathlib import Path
@@ -22,13 +22,22 @@ app.secret_key = os.environ.get('FLASK_SECRET', 'your_secret_key')
 #app.config['MYSQL_PASSWORD'] = os.environ.get('MYSQL_PASSWORD')#, 'your_password'
 #app.config['MYSQL_DB'] = os.environ.get('MYSQL_DB')#, 'hostel_db'
 
-app.config['MYSQL_HOST'] = os.getenv('MYSQLHOST')
-app.config['MYSQL_USER'] = os.getenv('MYSQLUSER')
-app.config['MYSQL_PASSWORD'] = os.getenv('MYSQLPASSWORD')
-app.config['MYSQL_DB'] = os.getenv('MYSQLDATABASE')
-app.config['MYSQL_PORT'] = int(os.getenv('MYSQLPORT', 3306))
+#app.config['MYSQL_HOST'] = os.getenv('MYSQLHOST')
+#app.config['MYSQL_USER'] = os.getenv('MYSQLUSER')
+#app.config['MYSQL_PASSWORD'] = os.getenv('MYSQLPASSWORD')
+#app.config['MYSQL_DB'] = os.getenv('MYSQLDATABASE')
+#app.config['MYSQL_PORT'] = int(os.getenv('MYSQLPORT', 3306))
 
-mysql = MySQL(app)
+def get_db_connection():
+    return pymysql.connect(
+        host=os.getenv("MYSQLHOST"),
+        user=os.getenv("MYSQLUSER"),
+        password=os.getenv("MYSQLPASSWORD"),
+        database=os.getenv("MYSQLDATABASE"),
+        port=int(os.getenv("MYSQLPORT", 3306)),
+        cursorclass=pymysql.cursors.DictCursor
+    )
+#mysql = MySQL(app)
 
 # Development fallback: if MySQL auth fails, use a local SQLite file with sample users
 use_sqlite = False
@@ -40,9 +49,10 @@ def init_dev_fallback():
     try:
         # Use an application context for MySQL probe to avoid 'working outside' errors
         with app.app_context():
-            cur = mysql.connection.cursor()
-            cur.execute('SELECT 1')
-            cur.close()
+            conn = get_db_connection()
+            cursor = conn.cursor()
+            conn.commit()
+            conn.close()
 
             # If we can connect to MySQL, attempt to apply schema.sql to the MySQL server
             try:
