@@ -11,13 +11,18 @@ app = Flask(__name__, template_folder='html', static_folder='.', static_url_path
 app.secret_key = os.environ.get('FLASK_SECRET', 'your_secret_key')
 
 # MySQL connection (Railway)
+from urllib.parse import urlparse
+
+
 def get_db_connection():
+    url = urlparse(os.getenv("MYSQL_URL"))
+
     return pymysql.connect(
-        host=os.getenv("MYSQLHOST"),
-        user=os.getenv("MYSQLUSER"),
-        password=os.getenv("MYSQLPASSWORD"),
-        database=os.getenv("MYSQLDATABASE"),
-        port=int(os.getenv("MYSQLPORT", 3306)),
+        host=url.hostname,
+        user=url.username,
+        password=url.password,
+        database=url.path[1:],  # remove '/'
+        port=url.port,
         cursorclass=pymysql.cursors.DictCursor,
         connect_timeout=10
     )
